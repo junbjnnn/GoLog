@@ -3,7 +3,7 @@
 //  XLog
 //
 //  Created by NamDV on 10/9/20.
-//  Copyright © 2020 NamDV. All rights reserved.
+//  Copyright © 2020 ER. All rights reserved.
 //
 
 import UIKit

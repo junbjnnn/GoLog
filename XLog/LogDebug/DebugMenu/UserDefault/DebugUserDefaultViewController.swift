@@ -3,7 +3,7 @@
 //  XLog
 //
 //  Created by NamDV on 9/30/20.
-//  Copyright © 2020 NamDV. All rights reserved.
+//  Copyright © 2020 ER. All rights reserved.
 //
 
 import Foundation

@@ -3,26 +3,16 @@
 //  XLog
 //
 //  Created by NamDV on 8/25/20.
-//  Copyright © 2020 NamDV. All rights reserved.
+//  Copyright © 2020 ER. All rights reserved.
 //
 
 import UIKit
 
 class DebugMenu {
     
-    public static let shared = DebugMenu()
+    static let shared = DebugMenu()
     
     private init() {}
-    
-    public var enable = false {
-        didSet {
-            if enable {
-                DebugMenu.shared.addDebugMenu()
-            } else {
-                DebugMenu.shared.removeDebugMenu()
-            }
-        }
-    }
     
     var devButton: DebugMenuButton? {
         // TODO: Make config root screen

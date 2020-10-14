@@ -3,7 +3,7 @@
 //  XLog
 //
 //  Created by NamDV on 8/21/20.
-//  Copyright © 2020 NamDV. All rights reserved.
+//  Copyright © 2020 ER. All rights reserved.
 //
 
 import UIKit
@@ -28,11 +28,11 @@ class BaseView: UIView {
     }
 
     private func commonInit() {
-        guard Bundle.main.path(forResource: String(describing: self), ofType: "nib") != nil else {
+        guard Bundle.main.path(forResource: className, ofType: "nib") != nil else {
             // file not exists
             return
         }
-        guard let content = Bundle.main.loadNibNamed(String(describing: self), owner: self, options: nil)?.first as? UIView else {
+        guard let content = Bundle.main.loadNibNamed(className, owner: self, options: nil)?.first as? UIView else {
             return
         }
 
@@ -53,6 +53,6 @@ class BaseView: UIView {
     func updateLayout() {}
     
     deinit {
-        Logger.log(type: .debug, String(describing: self), options: [.function])
+        XLog.log(type: .debug, String(describing: self), options: [.function])
     }
 }

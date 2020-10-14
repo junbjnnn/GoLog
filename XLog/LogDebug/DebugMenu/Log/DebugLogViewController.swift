@@ -3,7 +3,7 @@
 //  XLog
 //
 //  Created by NamDV on 8/25/20.
-//  Copyright © 2020 NamDV. All rights reserved.
+//  Copyright © 2020 ER. All rights reserved.
 //
 
 import Foundation
@@ -73,7 +73,7 @@ final class DebugLogViewController: UIViewController {
             logText = try String(contentsOfFile: Log.logger.currentPath,
                                  encoding: .utf8)
         } catch let error as NSError {
-            Logger.log(category: .app, type: .error, "read LogSwift fail - \(error)")
+            XLog.log(category: .app, type: .error, "read LogSwift fail - \(error)")
         }
         
         let logs = logText.components(separatedBy: "\n")
@@ -124,10 +124,10 @@ final class DebugLogViewController: UIViewController {
                     // Delete file
                     try fileManager.removeItem(atPath: filePath)
                 } else {
-                    Logger.log(category: .app, type: .error, "File log delete not exist")
+                    XLog.log(category: .app, type: .error, "File log delete not exist")
                 }
             } catch let error as NSError {
-                Logger.log(category: .app, type: .error, "Delete log fail - \(error)")
+                XLog.log(category: .app, type: .error, "Delete log fail - \(error)")
             }
             self.logText = ""
             self.logMilestones = []

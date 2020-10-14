@@ -3,7 +3,7 @@
 //  XLog
 //
 //  Created by NamDV on 9/7/20.
-//  Copyright © 2020 NamDV. All rights reserved.
+//  Copyright © 2020 ER. All rights reserved.
 //
 
 import Foundation
@@ -27,8 +27,8 @@ final class DebugInfoViewController: UIViewController {
         var info = ""
         info += "- Device Name : \(UIDevice.current.name)\n"
         info += "- MODEL : \(UIDevice.current.model)\n"
-        info += "- Environment : \(LoggerHelper.environment)\n"
-        info += "- UUID : \(LoggerHelper.uuidString)\n"
+        info += "- Environment : \(XLog.environment)\n"
+        info += "- UUID : \(XLog.uuidString)\n"
         if let dict = Bundle.main.infoDictionary {
             if let version = dict["CFBundleShortVersionString"] as? String,
                 let bundleVersion = dict["CFBundleVersion"] as? String,

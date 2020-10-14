@@ -1,9 +1,9 @@
 //
-//  Logger.swift
+//  XLog.swift
 //  XLog
 //
 //  Created by NamDV on 8/24/20.
-//  Copyright © 2020 NamDV. All rights reserved.
+//  Copyright © 2020 ER. All rights reserved.
 //
 
 import class Foundation.NSString
@@ -13,7 +13,7 @@ import class Foundation.Bundle
 import SwiftLog
 import os.log
 
-public final class Logger {
+public final class XLog {
     
     public static func log<T: CustomStringConvertible>(category: Category = .app,
                                                        type: OSLogType = .default,
@@ -23,7 +23,7 @@ public final class Logger {
                                                        functionName: String = #function,
                                                        lineNumber: Int = #line) {
         
-        let extraInfo: String = Logger.extraInfo(from: options,
+        let extraInfo: String = XLog.extraInfo(from: options,
                                                  filePath: filePath,
                                                  functionName: functionName,
                                                  lineNumber: lineNumber)
@@ -80,8 +80,8 @@ extension OSLogType: CustomStringConvertible {
     }
 }
 
-public extension Logger {
-    struct Category {
+public extension XLog {
+    struct Category: Equatable {
         private var rawValue: String
         
         public static let app = Category("APP")
@@ -90,6 +90,10 @@ public extension Logger {
         
         init(_ rawValue: String) {
             self.rawValue = rawValue
+        }
+        
+        public static func == (lhs: Category, rhs: Category) -> Bool {
+            return lhs.rawValue == rhs.rawValue
         }
     }
     
@@ -100,9 +104,49 @@ public extension Logger {
     }
 }
 
-public extension Logger.Category {
+public extension XLog.Category {
     var osLog: OSLog {
         let defaultSubsystem = Bundle.main.bundleIdentifier ?? "?"
         return OSLog(subsystem: defaultSubsystem, category: "\(self.rawValue)")
     }
+}
+
+public extension XLog {
+    
+    static let environment: String = {
+        let type: String
+        #if DEBUG
+        type = "DEBUG"
+        #elseif RELEASE
+        type = "RELEASE"
+        #endif
+        return type
+    }()
+    
+    static let uuidString = UIDevice.current.identifierForVendor?.uuidString ?? ""
+
+    static func logAppInfo() {
+        Log.logger.printToConsole = false
+        
+        XLog.log(type: .info, "==============================")
+        XLog.log(type: .info, "✳️ Time : \(Date())")
+        XLog.log(type: .info,
+                   "✳️ Device Name : \(UIDevice.current.name) - MODEL : \(UIDevice.current.model)")
+        XLog.log(type: .info, "✳️ Environment : \(environment)")
+        XLog.log(type: .info, "✳️ UUID : \(uuidString)")
+        if let dict = Bundle.main.infoDictionary {
+            if let version = dict["CFBundleShortVersionString"] as? String,
+                let bundleVersion = dict["CFBundleVersion"] as? String,
+                let appName = dict["CFBundleName"] as? String {
+                XLog.log(type: .info, "✳️ App Name : \(appName) - Version : \(version) (Build : \(bundleVersion))")
+                XLog.log(type: .info, "✳️ Sub System : \(Bundle.main.bundleIdentifier ?? "?")")
+            }
+            
+            if let commit = dict["BuildTime"] as? String {
+                XLog.log(type: .info, "✳️ Build GIT INFO : \(commit)")
+            }
+        }
+        XLog.log(type: .info, "==============================")
+    }
+    
 }

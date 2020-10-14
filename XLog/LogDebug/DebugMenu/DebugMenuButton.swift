@@ -3,14 +3,14 @@
 //  XLog
 //
 //  Created by NamDV on 8/25/20.
-//  Copyright © 2020 NamDV. All rights reserved.
+//  Copyright © 2020 ER. All rights reserved.
 //
 
 import UIKit
 
 class DebugMenuButton: UIControl {
 
-    public static let devButtonTag = 696969
+    static let devButtonTag = 696969
     
     var label: UILabel?
     var tappable = false

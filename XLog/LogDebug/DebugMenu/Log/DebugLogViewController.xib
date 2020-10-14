@@ -2,22 +2,21 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DebugLogViewController" customModule="StreamPlus" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DebugLogViewController" customModule="XLog" customModuleProvider="target">
             <connections>
                 <outlet property="logTextView" destination="DYj-6v-pNi" id="HF5-Uf-NSz"/>
                 <outlet property="runMilestonePicker" destination="cYI-Bh-sWq" id="FaF-ij-qdK"/>
-                <outlet property="searchTextField" destination="lnZ-tX-jZP" id="f3C-hu-ID3"/>
-                <outlet property="searchView" destination="Ui6-Vb-1is" id="Hse-nU-d5b"/>
+                <outlet property="searchTextField" destination="lnZ-tX-jZP" id="ftN-Fm-XPR"/>
+                <outlet property="searchView" destination="Ui6-Vb-1is" id="fe0-aZ-20E"/>
                 <outlet property="searchViewHeight" destination="lvo-t6-7Md" id="owJ-bd-5Na"/>
                 <outlet property="settingView" destination="cBj-ua-pE9" id="b7V-CQ-bam"/>
-                <outlet property="showAllLogSwitch" destination="dn0-tf-SUM" id="l0f-ZV-oRq"/>
-                <outlet property="showTimeSwitch" destination="2mY-KM-EMj" id="Hp5-0p-ZKW"/>
+                <outlet property="showAllLogSwitch" destination="dn0-tf-SUM" id="V1F-8m-WS5"/>
+                <outlet property="showTimeSwitch" destination="2mY-KM-EMj" id="Fyh-fZ-poN"/>
                 <outlet property="view" destination="iN0-l3-epB" id="xdk-zK-2NJ"/>
             </connections>
         </placeholder>
@@ -105,7 +104,7 @@
                                         <color key="titleColor" red="0.075685314830000003" green="0.46348196270000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </state>
                                     <connections>
-                                        <action selector="addSearchView:" destination="-1" eventType="touchUpInside" id="f3y-J5-Og4"/>
+                                        <action selector="addSearchView:" destination="-1" eventType="touchUpInside" id="g9a-nK-kPm"/>
                                     </connections>
                                 </button>
                             </subviews>

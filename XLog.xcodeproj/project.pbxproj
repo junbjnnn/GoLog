@@ -30,8 +30,9 @@
 		079CE03225361AB6005662AB /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CE01E25361AB6005662AB /* String+Extension.swift */; };
 		079CE03325361AB6005662AB /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CE01F25361AB6005662AB /* BaseView.swift */; };
 		079CE03425361AB6005662AB /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CE02025361AB6005662AB /* Array+Extension.swift */; };
-		079CE03525361AB6005662AB /* LoggerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CE02225361AB6005662AB /* LoggerHelper.swift */; };
-		079CE03625361AB6005662AB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CE02325361AB6005662AB /* Logger.swift */; };
+		079CE03625361AB6005662AB /* XLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CE02325361AB6005662AB /* XLog.swift */; };
+		079CE0382536E302005662AB /* XDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CE0372536E302005662AB /* XDebug.swift */; };
+		079CE03A25370908005662AB /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CE03925370908005662AB /* NSObject+Extension.swift */; };
 		11D99866234BC152AB089410 /* Pods_XLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E092D39185E5594EFE3D6433 /* Pods_XLog.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,8 +62,9 @@
 		079CE01E25361AB6005662AB /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		079CE01F25361AB6005662AB /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		079CE02025361AB6005662AB /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
-		079CE02225361AB6005662AB /* LoggerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerHelper.swift; sourceTree = "<group>"; };
-		079CE02325361AB6005662AB /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		079CE02325361AB6005662AB /* XLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XLog.swift; sourceTree = "<group>"; };
+		079CE0372536E302005662AB /* XDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDebug.swift; sourceTree = "<group>"; };
+		079CE03925370908005662AB /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		24E153640BEEAA6C0832D5AB /* Pods-XLog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XLog.debug.xcconfig"; path = "Target Support Files/Pods-XLog/Pods-XLog.debug.xcconfig"; sourceTree = "<group>"; };
 		C95D723677DBA388A378410C /* Pods-XLog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XLog.release.xcconfig"; path = "Target Support Files/Pods-XLog/Pods-XLog.release.xcconfig"; sourceTree = "<group>"; };
 		E092D39185E5594EFE3D6433 /* Pods_XLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +128,7 @@
 		079CE00B25361AB6005662AB /* DebugMenu */ = {
 			isa = PBXGroup;
 			children = (
+				079CE0372536E302005662AB /* XDebug.swift */,
 				079CE01125361AB6005662AB /* DebugMenu.swift */,
 				079CE00C25361AB6005662AB /* DebugMenuButton.swift */,
 				079CE01225361AB6005662AB /* DebugMenuViewController.xib */,
@@ -151,10 +154,10 @@
 		079CE01425361AB6005662AB /* Log */ = {
 			isa = PBXGroup;
 			children = (
-				079CE01525361AB6005662AB /* DebugLogSearchView.xib */,
 				079CE01625361AB6005662AB /* DebugLogViewController.swift */,
 				079CE01725361AB6005662AB /* DebugLogViewController.xib */,
 				079CE01825361AB6005662AB /* DebugLogSearchView.swift */,
+				079CE01525361AB6005662AB /* DebugLogSearchView.xib */,
 			);
 			path = Log;
 			sourceTree = "<group>";
@@ -162,8 +165,8 @@
 		079CE01A25361AB6005662AB /* AppInfo */ = {
 			isa = PBXGroup;
 			children = (
-				079CE01B25361AB6005662AB /* DebugInfoViewController.xib */,
 				079CE01C25361AB6005662AB /* DebugInfoViewController.swift */,
+				079CE01B25361AB6005662AB /* DebugInfoViewController.xib */,
 			);
 			path = AppInfo;
 			sourceTree = "<group>";
@@ -171,9 +174,10 @@
 		079CE01D25361AB6005662AB /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				079CE01E25361AB6005662AB /* String+Extension.swift */,
 				079CE01F25361AB6005662AB /* BaseView.swift */,
+				079CE01E25361AB6005662AB /* String+Extension.swift */,
 				079CE02025361AB6005662AB /* Array+Extension.swift */,
+				079CE03925370908005662AB /* NSObject+Extension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -181,8 +185,7 @@
 		079CE02125361AB6005662AB /* Log */ = {
 			isa = PBXGroup;
 			children = (
-				079CE02225361AB6005662AB /* LoggerHelper.swift */,
-				079CE02325361AB6005662AB /* Logger.swift */,
+				079CE02325361AB6005662AB /* XLog.swift */,
 			);
 			path = Log;
 			sourceTree = "<group>";
@@ -330,15 +333,16 @@
 				079CE02C25361AB6005662AB /* DebugLogViewController.swift in Sources */,
 				079CE02425361AB6005662AB /* DebugMenuButton.swift in Sources */,
 				079CE02A25361AB6005662AB /* DebugMenuViewController.swift in Sources */,
+				079CE0382536E302005662AB /* XDebug.swift in Sources */,
 				079CE03425361AB6005662AB /* Array+Extension.swift in Sources */,
 				079CE03225361AB6005662AB /* String+Extension.swift in Sources */,
-				079CE03625361AB6005662AB /* Logger.swift in Sources */,
+				079CE03625361AB6005662AB /* XLog.swift in Sources */,
 				079CE03125361AB6005662AB /* DebugInfoViewController.swift in Sources */,
+				079CE03A25370908005662AB /* NSObject+Extension.swift in Sources */,
 				079CDFFB2536192F005662AB /* ViewController.swift in Sources */,
 				079CE02525361AB6005662AB /* DebugUserDefaultViewController.swift in Sources */,
 				079CDFF72536192F005662AB /* AppDelegate.swift in Sources */,
 				079CE03325361AB6005662AB /* BaseView.swift in Sources */,
-				079CE03525361AB6005662AB /* LoggerHelper.swift in Sources */,
 				079CDFF92536192F005662AB /* SceneDelegate.swift in Sources */,
 				079CE02F25361AB6005662AB /* DebugMenuViewController+DataSource.swift in Sources */,
 			);

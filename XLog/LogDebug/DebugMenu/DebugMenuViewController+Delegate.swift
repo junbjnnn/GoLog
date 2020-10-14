@@ -3,20 +3,26 @@
 //  XLog
 //
 //  Created by NamDV on 9/7/20.
-//  Copyright © 2020 NamDV. All rights reserved.
+//  Copyright © 2020 ER. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
+protocol DebugMenuViewControllerDelegate: AnyObject {
+    func didSelectRow(_ id: DebugMenuRow.RowID, on vc: UIViewController)
+}
+
 // MARK: UITableViewDelegate
 extension DebugMenuViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch DebugMenuTableRow(rawValue: indexPath.row) {
+        let row = debugMenuTableRows[indexPath.row]
+        
+        switch row.id {
         case .appInfo:
             push(DebugInfoViewController())
-        case .log:
+        case .appLog:
             push(DebugLogViewController())
         case .updateUserDefault:
             push(DebugUserDefaultViewController())
@@ -27,6 +33,7 @@ extension DebugMenuViewController: UITableViewDelegate {
                 defaults.removeObject(forKey: key)
             }
         default:
+            XDebug.Configuration.debugMenuDelegate?.didSelectRow(row.id, on: self)
             break
         }
     }

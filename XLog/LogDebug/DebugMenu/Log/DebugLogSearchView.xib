@@ -2,16 +2,15 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DebugLogSearchView" customModule="StreamPlus" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DebugLogSearchView" customModule="XLog" customModuleProvider="target">
             <connections>
-                <outlet property="deleteButton" destination="MH7-aj-JTQ" id="sF7-h9-J5H"/>
-                <outlet property="searchTextField" destination="0G5-x4-C08" id="DRl-14-hTR"/>
+                <outlet property="deleteButton" destination="MH7-aj-JTQ" id="r22-ot-dzc"/>
+                <outlet property="searchTextField" destination="0G5-x4-C08" id="iQN-gU-EEI"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -31,7 +30,7 @@
                         <color key="titleColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
-                        <action selector="onDeleteTextField:" destination="-1" eventType="touchUpInside" id="ig8-85-Zr5"/>
+                        <action selector="onDeleteTextField:" destination="-1" eventType="touchUpInside" id="Cn3-SB-Dmi"/>
                     </connections>
                 </button>
             </subviews>
