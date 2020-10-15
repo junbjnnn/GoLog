@@ -108,3 +108,9 @@ extension ViewController: DebugMenuDelegate {
     
 }
 ```
+
+## Debug UserDefaults
+Config key for debug userdefaults
+```
+GoLog.setup(with: .init(userDefaultsKeys: [.init(key: "example_key_1"), .init(key: "example_key_2")]))
+```
