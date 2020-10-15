@@ -9,130 +9,166 @@
 import Foundation
 import UIKit
 
-enum DebugUserDefaultTableRow: Int {
-    case loginToken
-    case count
-}
-
-struct DebugUserDefaultModel {
-    // var loginToken = "LoginToken"
-}
-
-final class DebugUserDefaultViewController: UIViewController, UITextFieldDelegate {
+final class DebugUserDefaultViewController: UIViewController {
     
-    @IBOutlet private weak var tableView: UITableView!
-    private var userDefaultInfo = DebugUserDefaultModel()
+    private let cellKey = "cell_default_key"
+    
+    private lazy var userDefaultsKeys: [XLog.LocalUserDefaultsKey] = {
+        if XLog.configuration == nil {
+            return []
+        }
+        return XLog.configuration.userDefaultsKeys
+    }()
+    
+    private var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
+        tableView.estimatedRowHeight = 100
+        return tableView
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigation()
-        tableView.register(TextFieldCell.self, forCellReuseIdentifier: "textFieldCell")
-    }
-    
-    func setupNavigation() {
         navigationItem.title = "~ UserDefault ~"
-        
-        let saveButton = UIBarButtonItem(
-            title: "💾",
-            style: .plain,
-            target: self,
-            action: #selector(updateUserDefault(_:)))
-        navigationItem.rightBarButtonItems = [saveButton]
+        setupViews()
+        tableView.register(UserDefaultTableViewCell.self, forCellReuseIdentifier: cellKey)
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
-    @objc
-    func updateUserDefault(_ sender: Any?) {
-        // TODO: Update userdefault
-
-        let alertController = UIAlertController(title: "Success",
-                                                message: "Saved new value userdefault!",
-                                                preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alertController, animated: true, completion: nil)
+    private func setupViews() {
+        view.addSubview(tableView)
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
 }
 
 // MARK: UITableViewDataSource
-extension DebugUserDefaultViewController: UITableViewDataSource {
+extension DebugUserDefaultViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return userDefaultsKeys.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return DebugUserDefaultTableRow.count.rawValue
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "textFieldCell", for: indexPath) as? TextFieldCell {
-            cell.selectionStyle = .none
-            cell.dataTextField.tag = indexPath.section
-            cell.dataTextField.delegate = self
-            switch DebugUserDefaultTableRow(rawValue: indexPath.section) {
-            case .loginToken:
-                cell.dataTextField.text = "XXX"
-            default:
-                break
-            }
+        if let cell = tableView.dequeueReusableCell(withIdentifier: cellKey, for: indexPath) as? UserDefaultTableViewCell {
+            cell.item = userDefaultsKeys[indexPath.row]
             return cell
         }
-        
         return UITableViewCell()
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch DebugUserDefaultTableRow(rawValue: section) {
-        case .loginToken:
-            return "Login token"
-        default:
-            return "?"
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = userDefaultsKeys[indexPath.row]
+        let ac = UIAlertController(title: "Update key: \(item.key)", message: nil, preferredStyle: .alert)
+        ac.addTextField { (textfield) in
+            if let value = UserDefaults.standard.object(forKey: item.key) {
+                textfield.text = "\(value)"
+            }
         }
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.addTarget(self, action: #selector(valueChanged), for: .editingChanged)
-    }
-    
-    @objc
-    func valueChanged(_ textField: UITextField) {
-        switch DebugUserDefaultTableRow(rawValue: textField.tag) {
-        case .loginToken:
-            break
-        default:
-            break
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let submitAction = UIAlertAction(title: "Save", style: .default) { [unowned ac] _ in
+            if let tf = ac.textFields?.first {
+                print("Textfield: \(tf.text ?? "")")
+            }
         }
+        ac.addAction(cancelAction)
+        ac.addAction(submitAction)
+        present(ac, animated: true)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
-    
 }
 
-class TextFieldCell: UITableViewCell {
+extension UserDefaults {
+    func parse(key: String) -> String {
+        guard let value = UserDefaults.standard.object(forKey: key) else { return "" }
+        if type(of: value) == Bool.self {
+        }
+        if let valueBool = value as? Bool {
+            return valueBool ? "true" : "false"
+        }
+        return "\(value)"
+    }
+}
+
+class UserDefaultTableViewCell: UITableViewCell {
     
-    let dataTextField: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = UIFont.systemFont(ofSize: 20)
-        return textField
+    var item: XLog.LocalUserDefaultsKey! {
+        didSet {
+            titleLabel.text = "key: \(item.key)"
+            let value = UserDefaults.standard.parse(key: item.key)
+            valueLabel.text = "value: \(value)"
+        }
+    }
+    
+    private var titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .darkGray
+        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private var valueLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private var lineView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .gray
+        return view
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        initConstraints()
+        selectionStyle = .none
+        setupViews()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func initConstraints() {
-        addSubview(dataTextField)
-        
+    private func setupViews() {
+        addSubview(titleLabel)
+        addSubview(valueLabel)
+        addSubview(lineView)
         NSLayoutConstraint.activate([
-            dataTextField.heightAnchor.constraint(equalToConstant: 40),
-            dataTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            dataTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            dataTextField.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            dataTextField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            valueLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            valueLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            valueLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            lineView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            lineView.topAnchor.constraint(equalTo: valueLabel.bottomAnchor, constant: 20),
+            lineView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            lineView.heightAnchor.constraint(equalToConstant: 1),
+            lineView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        titleLabel.text = ""
+        valueLabel.text = ""
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
 }

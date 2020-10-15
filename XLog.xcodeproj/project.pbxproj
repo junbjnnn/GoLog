@@ -15,7 +15,6 @@
 		079CE0032536193B005662AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 079CE0012536193B005662AB /* LaunchScreen.storyboard */; };
 		079CE02425361AB6005662AB /* DebugMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CE00C25361AB6005662AB /* DebugMenuButton.swift */; };
 		079CE02525361AB6005662AB /* DebugUserDefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CE00E25361AB6005662AB /* DebugUserDefaultViewController.swift */; };
-		079CE02625361AB6005662AB /* DebugUserDefaultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 079CE00F25361AB6005662AB /* DebugUserDefaultViewController.xib */; };
 		079CE02725361AB6005662AB /* DebugMenuViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CE01025361AB6005662AB /* DebugMenuViewController+Delegate.swift */; };
 		079CE02825361AB6005662AB /* DebugMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CE01125361AB6005662AB /* DebugMenu.swift */; };
 		079CE02925361AB6005662AB /* DebugMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 079CE01225361AB6005662AB /* DebugMenuViewController.xib */; };
@@ -47,7 +46,6 @@
 		079CE0042536193B005662AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		079CE00C25361AB6005662AB /* DebugMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugMenuButton.swift; sourceTree = "<group>"; };
 		079CE00E25361AB6005662AB /* DebugUserDefaultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugUserDefaultViewController.swift; sourceTree = "<group>"; };
-		079CE00F25361AB6005662AB /* DebugUserDefaultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DebugUserDefaultViewController.xib; sourceTree = "<group>"; };
 		079CE01025361AB6005662AB /* DebugMenuViewController+Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DebugMenuViewController+Delegate.swift"; sourceTree = "<group>"; };
 		079CE01125361AB6005662AB /* DebugMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugMenu.swift; sourceTree = "<group>"; };
 		079CE01225361AB6005662AB /* DebugMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DebugMenuViewController.xib; sourceTree = "<group>"; };
@@ -146,7 +144,6 @@
 			isa = PBXGroup;
 			children = (
 				079CE00E25361AB6005662AB /* DebugUserDefaultViewController.swift */,
-				079CE00F25361AB6005662AB /* DebugUserDefaultViewController.xib */,
 			);
 			path = UserDefault;
 			sourceTree = "<group>";
@@ -269,7 +266,6 @@
 			files = (
 				079CE02925361AB6005662AB /* DebugMenuViewController.xib in Resources */,
 				079CE0032536193B005662AB /* LaunchScreen.storyboard in Resources */,
-				079CE02625361AB6005662AB /* DebugUserDefaultViewController.xib in Resources */,
 				079CE0002536193B005662AB /* Assets.xcassets in Resources */,
 				079CDFFE2536192F005662AB /* Main.storyboard in Resources */,
 				079CE02D25361AB6005662AB /* DebugLogViewController.xib in Resources */,
