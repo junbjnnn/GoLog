@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DebugLogSearchView" customModule="XLog" customModuleProvider="target">
+            <connections>
+                <outlet property="deleteButton" destination="MH7-aj-JTQ" id="r22-ot-dzc"/>
+                <outlet property="searchTextField" destination="0G5-x4-C08" id="iQN-gU-EEI"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0G5-x4-C08">
+                    <rect key="frame" x="0.0" y="8" width="195" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MH7-aj-JTQ">
+                    <rect key="frame" x="200" y="7" width="30" height="36"/>
+                    <fontDescription key="fontDescription" type="system" weight="black" pointSize="20"/>
+                    <state key="normal" title="✘">
+                        <color key="titleColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="onDeleteTextField:" destination="-1" eventType="touchUpInside" id="Cn3-SB-Dmi"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="MH7-aj-JTQ" secondAttribute="trailing" constant="20" id="76J-fU-6Xt"/>
+                <constraint firstAttribute="trailing" secondItem="0G5-x4-C08" secondAttribute="trailing" constant="55" id="93v-CL-NB5"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="0G5-x4-C08" secondAttribute="bottom" constant="8" id="XUf-Iy-Whr"/>
+                <constraint firstItem="MH7-aj-JTQ" firstAttribute="centerY" secondItem="0G5-x4-C08" secondAttribute="centerY" id="fRB-Kd-ICV"/>
+                <constraint firstItem="0G5-x4-C08" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gzM-do-hxG"/>
+                <constraint firstItem="0G5-x4-C08" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="lgo-1M-TKP"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="18.840579710144929" y="-196.875"/>
+        </view>
+    </objects>
+</document>
