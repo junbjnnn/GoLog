@@ -15,8 +15,15 @@ import os.log
 
 public final class XLog {
     
-    struct Configuration {
+    public internal(set) static var configuration: Configuration!
+    
+    public struct Configuration {
         public static var logToFile = true
+        var userDefaultsKeys: [LocalUserDefaultsKey] = []
+    }
+    
+    public static func setup(with configuration: Configuration) {
+        XLog.configuration = configuration
     }
     
     public static func log<T: CustomStringConvertible>(category: Category = .app,
@@ -66,6 +73,15 @@ public final class XLog {
         }
         
         return "[\(extraInfo)] - "
+    }
+    
+    public struct LocalUserDefaultsKey {
+        var key: String
+        var description: String?
+        
+        init(key: String) {
+            self.key = key
+        }
     }
 }
 
