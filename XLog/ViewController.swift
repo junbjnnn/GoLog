@@ -73,7 +73,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: DebugMenuViewControllerDelegate {
+extension ViewController: DebugMenuDelegate {
     
     func didSelectRow(_ id: DebugMenuRow.RowID, on vc: UIViewController) {
         switch id {

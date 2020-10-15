@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol DebugMenuViewControllerDelegate: AnyObject {
+protocol DebugMenuDelegate: AnyObject {
     func didSelectRow(_ id: DebugMenuRow.RowID, on vc: UIViewController)
 }
 

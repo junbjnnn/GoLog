@@ -4,6 +4,12 @@
 ## Log
 <br/>
 
+Disable log to file (default true)
+``` Swift
+XLog.Configuration.logToFile = false
+```
+<br/>
+
 Let’s log!
 ``` Swift
 XLog.log("1/ Default category = .app, type = .default - Message")
