@@ -28,11 +28,12 @@ class BaseView: UIView {
     }
 
     private func commonInit() {
-        guard Bundle.main.path(forResource: className, ofType: "nib") != nil else {
+        let bundle = Bundle(for: self.classForCoder)
+        guard bundle.path(forResource: className, ofType: "nib") != nil else {
             // file not exists
             return
         }
-        guard let content = Bundle.main.loadNibNamed(className, owner: self, options: nil)?.first as? UIView else {
+        guard let content = bundle.loadNibNamed(className, owner: self, options: nil)?.first as? UIView else {
             return
         }
 

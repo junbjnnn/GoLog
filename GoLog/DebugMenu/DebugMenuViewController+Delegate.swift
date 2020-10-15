@@ -23,7 +23,9 @@ extension DebugMenuViewController: UITableViewDelegate {
         case .appInfo:
             push(DebugInfoViewController())
         case .appLog:
-            push(DebugLogViewController())
+            let bundle = Bundle(for: self.classForCoder)
+            let vc = DebugLogViewController.initFromNib(bundle: bundle)
+            push(vc)
         case .updateUserDefault:
             push(DebugUserDefaultViewController())
         case .resetUserDefault:

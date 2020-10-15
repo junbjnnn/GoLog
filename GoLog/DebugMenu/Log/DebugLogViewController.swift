@@ -174,6 +174,7 @@ final class DebugLogViewController: UIViewController {
                                                              y: searchViewFrameY,
                                                              width: Constants.Dimensions.searchViewWidth,
                                                              height: Constants.Dimensions.searchViewHeight))
+        
         searchViewAdd.delegate = self
         searchViewAdd.tag = searchTextFields.count
         searchView.addSubview(searchViewAdd)

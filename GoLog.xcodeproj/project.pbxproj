@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3C07C578ED82582F8BB9C137 /* Pods_GoLogExamples.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DA052086FA1EAA570D77D4 /* Pods_GoLogExamples.framework */; };
 		4AFE3F342A19148419B3C57D /* Pods_GoLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE1D45D7B510A806D5CCAFBE /* Pods_GoLog.framework */; };
+		ADAFEF952538546200957D16 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFEF942538546200957D16 /* UIViewController+Extension.swift */; };
 		ADF370D32538309300E63D82 /* GoLog.h in Headers */ = {isa = PBXBuildFile; fileRef = ADF370D12538309300E63D82 /* GoLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADF370E0253830CA00E63D82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF370DF253830CA00E63D82 /* AppDelegate.swift */; };
 		ADF370E4253830CA00E63D82 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF370E3253830CA00E63D82 /* ViewController.swift */; };
@@ -44,6 +45,7 @@
 		2CA5A87BBC72C9BF13FD7D11 /* Pods-GoLog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoLog.debug.xcconfig"; path = "Target Support Files/Pods-GoLog/Pods-GoLog.debug.xcconfig"; sourceTree = "<group>"; };
 		3935AA7A31EC0BB9BA15D4AE /* Pods-XLogExamples.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XLogExamples.debug.xcconfig"; path = "Target Support Files/Pods-XLogExamples/Pods-XLogExamples.debug.xcconfig"; sourceTree = "<group>"; };
 		3F1895E1CF14C29672733FAC /* Pods-GoLogExamples.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoLogExamples.debug.xcconfig"; path = "Target Support Files/Pods-GoLogExamples/Pods-GoLogExamples.debug.xcconfig"; sourceTree = "<group>"; };
+		ADAFEF942538546200957D16 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		ADF370CE2538309200E63D82 /* GoLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADF370D12538309300E63D82 /* GoLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoLog.h; sourceTree = "<group>"; };
 		ADF370D22538309300E63D82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,6 +126,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		ADAFEF93253851F400957D16 /* GoLogBundle */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = GoLogBundle;
+			sourceTree = "<group>";
+		};
 		ADF370C42538309200E63D82 = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +158,7 @@
 		ADF370D02538309300E63D82 /* GoLog */ = {
 			isa = PBXGroup;
 			children = (
+				ADAFEF93253851F400957D16 /* GoLogBundle */,
 				ADF370F5253831D100E63D82 /* Log */,
 				ADF370F4253831C900E63D82 /* DebugMenu */,
 				ADF370F3253831BE00E63D82 /* Common */,
@@ -179,6 +189,7 @@
 				ADF370F7253831E100E63D82 /* BaseView.swift */,
 				ADF370F9253831E100E63D82 /* NSObject+Extension.swift */,
 				ADF370F8253831E100E63D82 /* String+Extension.swift */,
+				ADAFEF942538546200957D16 /* UIViewController+Extension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -218,8 +229,8 @@
 		ADF3710F2538320600E63D82 /* Log */ = {
 			isa = PBXGroup;
 			children = (
-				ADF371112538320F00E63D82 /* DebugLogSearchView.swift */,
 				ADF371102538320F00E63D82 /* DebugLogSearchView.xib */,
+				ADF371112538320F00E63D82 /* DebugLogSearchView.swift */,
 				ADF371132538320F00E63D82 /* DebugLogViewController.swift */,
 				ADF371122538320F00E63D82 /* DebugLogViewController.xib */,
 			);
@@ -416,6 +427,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADAFEF952538546200957D16 /* UIViewController+Extension.swift in Sources */,
 				ADF3711E2538324900E63D82 /* GoLog.swift in Sources */,
 				ADF3711C2538324100E63D82 /* XDebug.swift in Sources */,
 				ADF37106253831EE00E63D82 /* DebugMenuViewController+Delegate.swift in Sources */,
