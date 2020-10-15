@@ -15,6 +15,10 @@ import os.log
 
 public final class XLog {
     
+    struct Configuration {
+        public static var logToFile = true
+    }
+    
     public static func log<T: CustomStringConvertible>(category: Category = .app,
                                                        type: OSLogType = .default,
                                                        _ message: T,
@@ -34,7 +38,10 @@ public final class XLog {
                type.description,
                extraInfo,
                message.description)
-        Log.logger.write(type.description + extraInfo + " - " + message.description)
+        
+        if Configuration.logToFile {
+            Log.logger.write(type.description + extraInfo + " - " + message.description)
+        }
     }
     
     // Convenience

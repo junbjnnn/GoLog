@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftLog
 
 final class DebugInfoViewController: UIViewController {
     
@@ -39,9 +40,11 @@ final class DebugInfoViewController: UIViewController {
             }
             
             if let commit = dict["BuildTime"] as? String {
-                info += "- Build GIT INFO : \(commit)"
+                info += "- Build GIT INFO : \(commit)\n"
             }
         }
+        info += "- Log path : \(Log.logger.currentPath)\n"
+        info += XDebug.Configuration.debugAppInfoText
         
         return info
     }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftLog
 
 // XLog - Config more category
 extension XLog.Category {
@@ -25,10 +24,21 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // XLog
+        // Turn off log to file
+        // XLog.Configuration.logToFile = false
+        
+        // Log basic app info
         XLog.logAppInfo()
+        
+        // Log syntax
         testLog()
         
+        // Enable debug button
         XDebug.Configuration.debugMenuEnable = true
+        
+        // Add more field in debug menu
         XDebug.Configuration.debugMenuDelegate = self
         XDebug.Configuration.debugMenuTableRows.append(DebugMenuRow(id: .test1,
                                                                     title: "Test 1"))
@@ -38,6 +48,9 @@ class ViewController: UIViewController {
         XDebug.Configuration.debugMenuTableRows.append(DebugMenuRow(id: .test3,
                                                                     title: "Test 3",
                                                                     type: .switchRow(isOn: false, target: self, selfAction: #selector(self.switchAction))))
+        
+        // Add more info in debug app info view
+        XDebug.Configuration.debugAppInfoText += "Show more app info"
     }
     
     

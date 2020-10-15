@@ -21,6 +21,7 @@ public final class XDebug {
         }
         public static var debugMenuTableRows = [DebugMenuRow]()
         public static var debugMenuDelegate: DebugMenuViewControllerDelegate?
+        public static var debugAppInfoText = ""
     }
 }
 
