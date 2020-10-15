@@ -89,7 +89,7 @@ XDebug.Configuration.debugMenuTableRows.append(DebugMenuRow(id: .test3,
                                                             type: .switchRow(isOn: false, target: self, selfAction: #selector(self.switchAction))))
 ```
 ``` Swift
-extension ViewController: DebugMenuViewControllerDelegate {
+extension ViewController: DebugMenuDelegate {
     
     func didSelectRow(_ id: DebugMenuRow.RowID, on vc: UIViewController) {
         switch id {

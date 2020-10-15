@@ -17,11 +17,15 @@ final class DebugMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigation()
+        setupDataSource()
     }
     
     func setupNavigation() {
         navigationItem.title = "~ Debug Menu ~"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
+    func setupDataSource() {
         debugMenuTableRows.append(DebugMenuRow(id: .appInfo, title: "App info"))
         debugMenuTableRows.append(DebugMenuRow(id: .appLog,title: "Log"))
         debugMenuTableRows.append(DebugMenuRow(id: .updateUserDefault,title: "Update UserDefault"))
