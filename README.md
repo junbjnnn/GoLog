@@ -1,9 +1,11 @@
 # GoLog
 
-----
+## Installation
+To install via CocoaPods add this lines to your Podfile.
+```
+pod 'GoLog', '0.0.2'
+```
 ## Log
-<br/>
-
 Disable log to file (default true)
 ``` Swift
 GoLog.Configuration.logToFile = false
