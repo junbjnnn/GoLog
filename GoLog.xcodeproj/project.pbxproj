@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3C07C578ED82582F8BB9C137 /* Pods_GoLogExamples.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DA052086FA1EAA570D77D4 /* Pods_GoLogExamples.framework */; };
 		4AFE3F342A19148419B3C57D /* Pods_GoLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE1D45D7B510A806D5CCAFBE /* Pods_GoLog.framework */; };
+		AD723A8525394359001DF182 /* GoLog.podspec in Resources */ = {isa = PBXBuildFile; fileRef = AD723A8425394359001DF182 /* GoLog.podspec */; };
 		ADAFEF952538546200957D16 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFEF942538546200957D16 /* UIViewController+Extension.swift */; };
 		ADF370D32538309300E63D82 /* GoLog.h in Headers */ = {isa = PBXBuildFile; fileRef = ADF370D12538309300E63D82 /* GoLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADF370E0253830CA00E63D82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF370DF253830CA00E63D82 /* AppDelegate.swift */; };
@@ -45,6 +46,7 @@
 		2CA5A87BBC72C9BF13FD7D11 /* Pods-GoLog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoLog.debug.xcconfig"; path = "Target Support Files/Pods-GoLog/Pods-GoLog.debug.xcconfig"; sourceTree = "<group>"; };
 		3935AA7A31EC0BB9BA15D4AE /* Pods-XLogExamples.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XLogExamples.debug.xcconfig"; path = "Target Support Files/Pods-XLogExamples/Pods-XLogExamples.debug.xcconfig"; sourceTree = "<group>"; };
 		3F1895E1CF14C29672733FAC /* Pods-GoLogExamples.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoLogExamples.debug.xcconfig"; path = "Target Support Files/Pods-GoLogExamples/Pods-GoLogExamples.debug.xcconfig"; sourceTree = "<group>"; };
+		AD723A8425394359001DF182 /* GoLog.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GoLog.podspec; sourceTree = "<group>"; };
 		ADAFEF942538546200957D16 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		ADF370CE2538309200E63D82 /* GoLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADF370D12538309300E63D82 /* GoLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoLog.h; sourceTree = "<group>"; };
@@ -129,6 +131,8 @@
 		ADAFEF93253851F400957D16 /* GoLogBundle */ = {
 			isa = PBXGroup;
 			children = (
+				ADF371102538320F00E63D82 /* DebugLogSearchView.xib */,
+				ADF371122538320F00E63D82 /* DebugLogViewController.xib */,
 			);
 			path = GoLogBundle;
 			sourceTree = "<group>";
@@ -136,6 +140,7 @@
 		ADF370C42538309200E63D82 = {
 			isa = PBXGroup;
 			children = (
+				AD723A8425394359001DF182 /* GoLog.podspec */,
 				ADF371242538476C00E63D82 /* LICENSE */,
 				ADF371252538476C00E63D82 /* README.md */,
 				ADF370D02538309300E63D82 /* GoLog */,
@@ -229,10 +234,8 @@
 		ADF3710F2538320600E63D82 /* Log */ = {
 			isa = PBXGroup;
 			children = (
-				ADF371102538320F00E63D82 /* DebugLogSearchView.xib */,
 				ADF371112538320F00E63D82 /* DebugLogSearchView.swift */,
 				ADF371132538320F00E63D82 /* DebugLogViewController.swift */,
-				ADF371122538320F00E63D82 /* DebugLogViewController.xib */,
 			);
 			path = Log;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				ADF371262538476C00E63D82 /* LICENSE in Resources */,
 				ADF371142538320F00E63D82 /* DebugLogSearchView.xib in Resources */,
 				ADF371272538476C00E63D82 /* README.md in Resources */,
+				AD723A8525394359001DF182 /* GoLog.podspec in Resources */,
 				ADF371162538320F00E63D82 /* DebugLogViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
