@@ -70,6 +70,10 @@ extension DebugUserDefaultViewController: UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = userDefaultsKeys[indexPath.row]
+//        showAlertEditUserDefaults(for: item)
+    }
+    
+    private func showAlertEditUserDefaults(for item: GoLog.LocalUserDefaultsKey) {
         let ac = UIAlertController(title: "Update key: \(item.key)", message: nil, preferredStyle: .alert)
         ac.addTextField { (textfield) in
             if let value = UserDefaults.standard.object(forKey: item.key) {
@@ -86,7 +90,6 @@ extension DebugUserDefaultViewController: UITableViewDataSource, UITableViewDele
         ac.addAction(cancelAction)
         ac.addAction(submitAction)
         present(ac, animated: true)
-        tableView.deselectRow(at: indexPath, animated: false)
     }
 }
 

@@ -10,6 +10,8 @@
 		3C07C578ED82582F8BB9C137 /* Pods_GoLogExamples.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DA052086FA1EAA570D77D4 /* Pods_GoLogExamples.framework */; };
 		4AFE3F342A19148419B3C57D /* Pods_GoLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE1D45D7B510A806D5CCAFBE /* Pods_GoLog.framework */; };
 		AD723A8525394359001DF182 /* GoLog.podspec in Resources */ = {isa = PBXBuildFile; fileRef = AD723A8425394359001DF182 /* GoLog.podspec */; };
+		AD723A87253C35D8001DF182 /* OSLogType+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD723A86253C35D8001DF182 /* OSLogType+Extension.swift */; };
+		AD723A89253C3624001DF182 /* GoLog+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD723A88253C3624001DF182 /* GoLog+Extension.swift */; };
 		ADAFEF952538546200957D16 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADAFEF942538546200957D16 /* UIViewController+Extension.swift */; };
 		ADF370D32538309300E63D82 /* GoLog.h in Headers */ = {isa = PBXBuildFile; fileRef = ADF370D12538309300E63D82 /* GoLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADF370E0253830CA00E63D82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF370DF253830CA00E63D82 /* AppDelegate.swift */; };
@@ -31,10 +33,7 @@
 		ADF371162538320F00E63D82 /* DebugLogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ADF371122538320F00E63D82 /* DebugLogViewController.xib */; };
 		ADF371172538320F00E63D82 /* DebugLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF371132538320F00E63D82 /* DebugLogViewController.swift */; };
 		ADF3711A2538322C00E63D82 /* DebugUserDefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF371192538322C00E63D82 /* DebugUserDefaultViewController.swift */; };
-		ADF3711C2538324100E63D82 /* XDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF3711B2538324100E63D82 /* XDebug.swift */; };
 		ADF3711E2538324900E63D82 /* GoLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF3711D2538324900E63D82 /* GoLog.swift */; };
-		ADF371202538333300E63D82 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF3711F2538333300E63D82 /* SceneDelegate.swift */; };
-		ADF3712225383E9F00E63D82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADF3712125383E9F00E63D82 /* Main.storyboard */; };
 		ADF371262538476C00E63D82 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = ADF371242538476C00E63D82 /* LICENSE */; };
 		ADF371272538476C00E63D82 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = ADF371252538476C00E63D82 /* README.md */; };
 /* End PBXBuildFile section */
@@ -47,6 +46,8 @@
 		3935AA7A31EC0BB9BA15D4AE /* Pods-XLogExamples.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XLogExamples.debug.xcconfig"; path = "Target Support Files/Pods-XLogExamples/Pods-XLogExamples.debug.xcconfig"; sourceTree = "<group>"; };
 		3F1895E1CF14C29672733FAC /* Pods-GoLogExamples.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoLogExamples.debug.xcconfig"; path = "Target Support Files/Pods-GoLogExamples/Pods-GoLogExamples.debug.xcconfig"; sourceTree = "<group>"; };
 		AD723A8425394359001DF182 /* GoLog.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GoLog.podspec; sourceTree = "<group>"; };
+		AD723A86253C35D8001DF182 /* OSLogType+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLogType+Extension.swift"; sourceTree = "<group>"; };
+		AD723A88253C3624001DF182 /* GoLog+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GoLog+Extension.swift"; sourceTree = "<group>"; };
 		ADAFEF942538546200957D16 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		ADF370CE2538309200E63D82 /* GoLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADF370D12538309300E63D82 /* GoLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoLog.h; sourceTree = "<group>"; };
@@ -72,10 +73,7 @@
 		ADF371122538320F00E63D82 /* DebugLogViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DebugLogViewController.xib; sourceTree = "<group>"; };
 		ADF371132538320F00E63D82 /* DebugLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugLogViewController.swift; sourceTree = "<group>"; };
 		ADF371192538322C00E63D82 /* DebugUserDefaultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugUserDefaultViewController.swift; sourceTree = "<group>"; };
-		ADF3711B2538324100E63D82 /* XDebug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XDebug.swift; sourceTree = "<group>"; };
 		ADF3711D2538324900E63D82 /* GoLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoLog.swift; sourceTree = "<group>"; };
-		ADF3711F2538333300E63D82 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		ADF3712125383E9F00E63D82 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		ADF371242538476C00E63D82 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		ADF371252538476C00E63D82 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B2DA052086FA1EAA570D77D4 /* Pods_GoLogExamples.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoLogExamples.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,11 +174,9 @@
 		ADF370DE253830CA00E63D82 /* GoLogExamples */ = {
 			isa = PBXGroup;
 			children = (
-				ADF3711F2538333300E63D82 /* SceneDelegate.swift */,
 				ADF370DF253830CA00E63D82 /* AppDelegate.swift */,
 				ADF370E3253830CA00E63D82 /* ViewController.swift */,
 				ADF370E8253830CC00E63D82 /* Assets.xcassets */,
-				ADF3712125383E9F00E63D82 /* Main.storyboard */,
 				ADF370EA253830CC00E63D82 /* LaunchScreen.storyboard */,
 				ADF370ED253830CC00E63D82 /* Info.plist */,
 			);
@@ -195,6 +191,7 @@
 				ADF370F9253831E100E63D82 /* NSObject+Extension.swift */,
 				ADF370F8253831E100E63D82 /* String+Extension.swift */,
 				ADAFEF942538546200957D16 /* UIViewController+Extension.swift */,
+				AD723A86253C35D8001DF182 /* OSLogType+Extension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -202,7 +199,6 @@
 		ADF370F4253831C900E63D82 /* DebugMenu */ = {
 			isa = PBXGroup;
 			children = (
-				ADF3711B2538324100E63D82 /* XDebug.swift */,
 				ADF371182538321800E63D82 /* UserDefault */,
 				ADF3710F2538320600E63D82 /* Log */,
 				ADF3710A253831F500E63D82 /* AppInfo */,
@@ -219,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				ADF3711D2538324900E63D82 /* GoLog.swift */,
+				AD723A88253C3624001DF182 /* GoLog+Extension.swift */,
 			);
 			path = Log;
 			sourceTree = "<group>";
@@ -354,7 +351,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADF3712225383E9F00E63D82 /* Main.storyboard in Resources */,
 				ADF370EC253830CC00E63D82 /* LaunchScreen.storyboard in Resources */,
 				ADF370E9253830CC00E63D82 /* Assets.xcassets in Resources */,
 			);
@@ -433,9 +429,10 @@
 			files = (
 				ADAFEF952538546200957D16 /* UIViewController+Extension.swift in Sources */,
 				ADF3711E2538324900E63D82 /* GoLog.swift in Sources */,
-				ADF3711C2538324100E63D82 /* XDebug.swift in Sources */,
+				AD723A87253C35D8001DF182 /* OSLogType+Extension.swift in Sources */,
 				ADF37106253831EE00E63D82 /* DebugMenuViewController+Delegate.swift in Sources */,
 				ADF371152538320F00E63D82 /* DebugLogSearchView.swift in Sources */,
+				AD723A89253C3624001DF182 /* GoLog+Extension.swift in Sources */,
 				ADF370FA253831E100E63D82 /* Array+Extension.swift in Sources */,
 				ADF370FC253831E100E63D82 /* String+Extension.swift in Sources */,
 				ADF370FB253831E100E63D82 /* BaseView.swift in Sources */,
@@ -456,7 +453,6 @@
 			files = (
 				ADF370E4253830CA00E63D82 /* ViewController.swift in Sources */,
 				ADF370E0253830CA00E63D82 /* AppDelegate.swift in Sources */,
-				ADF371202538333300E63D82 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

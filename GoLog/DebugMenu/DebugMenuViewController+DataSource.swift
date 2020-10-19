@@ -13,19 +13,24 @@ import UIKit
 extension DebugMenuViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return debugMenuTableRows.count
+        return debugMenus.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row = debugMenuTableRows[indexPath.row]
-        
-        switch row.type {
-        case .defaultRow(let detailText):
-            return value1Cell(withText: row.title, detailText: detailText)
-        case .switchRow(let isOn, let target, let selfAction):
-            return switchCell(withText: row.title, isOn:isOn, target: target, selfAction: selfAction)
+        let menuItem = debugMenus[indexPath.row]
+        switch menuItem.style {
+        case .defaultRow:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: DebugMenuDefaultCell.cellId, for: indexPath) as? DebugMenuDefaultCell {
+                cell.data = menuItem
+                return cell
+            }
+        case .switchRow:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: DebugMenuSwitchCell.cellId, for: indexPath) as? DebugMenuSwitchCell {
+                cell.data = menuItem
+                cell.delegate = self
+                return cell
+            }
         }
+        return UITableViewCell()
     }
-    
-    
 }
