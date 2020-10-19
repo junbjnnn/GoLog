@@ -3,16 +3,35 @@
 ## Installation
 To install via CocoaPods add this lines to your Podfile.
 ```
-pod 'GoLog', '0.0.2'
+pod 'GoLog', '0.0.3'
 ```
-## Log
-Disable log to file (default true)
+## Setup
+Example setup
 ``` Swift
-GoLog.Configuration.logToFile = false
+let menu = [
+    GoLog.AddOnDebugMenu(menuId: .custom(key: "test1"), title: "Test 1"), 
+    GoLog.AddOnDebugMenu(menuId: .custom(key: "test2"), title: "Test 2"),
+    GoLog.AddOnDebugMenu(menuId: .custom(key: "test3"), title: "Test 3", style: .switchRow(isOn: false))
+]
+let userDefaults = [
+    GoLog.LocalUserDefaultsKey(key: "ud_key_1"), 
+    GoLog.LocalUserDefaultsKey(key: "ud_key_2")
+]
+let config = GoLog.Configuration(
+    logToFile: true,
+    debugAppInfoText: "Show more app info",
+    addOnDebugMenu: menu,
+    userDefaultsKeys: userDefaults
+)
+GoLog.setup(with: config, debugMenuDelegate: self)
 ```
-<br/>
+## Debug menu
+Let's debug
+``` Swift
+GoLog.showDebugMenu = true
+```
 
-Let’s log!
+### Let’s log!
 ``` Swift
 GoLog.log("1/ Default category = .app, type = .default - Message")
 GoLog.log(type: .default, "2/ Default category = .app, - Message")
@@ -35,7 +54,6 @@ GoLog.log(category: .app, type: .default, "8/ With all options", options: [.all]
 2020-10-15 09:32:54.435216+0700 GoLog[51738:16352794] [API] ❌ ERROR: [ViewController.swift:63] - 7/ With fileAndLine
 2020-10-15 09:32:54.436309+0700 GoLog[51738:16352794] [APP] ✍️ DEFAULT: [ViewController.swift:64 testLog()] - 8/ With all options
 ```
-<br/>
 
 Quick log app info
 ``` Swift
@@ -58,61 +76,4 @@ extension GoLog.Category {
     static let auth = GoLog.Category("AUTH")
     static let socket = GoLog.Category("SOCKET")
 }
-```
-<br/>
-
-## Debug menu
-<br/>
-
-Let's debug
-``` Swift
-XDebug.Configuration.debugMenuEnable = true
-```
-<br/>
-
-Config more row
-``` Swift
-extension DebugMenuRow.RowID {
-    static let test1 = DebugMenuRow.RowID("test1")
-    static let test2 = DebugMenuRow.RowID("test2")
-    static let test3 = DebugMenuRow.RowID("test3")
-}
-```
-``` Swift
-XDebug.Configuration.debugMenuDelegate = self
-
-XDebug.Configuration.debugMenuTableRows.append(DebugMenuRow(id: .test1,
-                                                            title: "Test 1"))
-XDebug.Configuration.debugMenuTableRows.append(DebugMenuRow(id: .test2 ,
-                                                            title: "Test 2",
-                                                            type: .defaultRow(detailText: "Detail")))
-XDebug.Configuration.debugMenuTableRows.append(DebugMenuRow(id: .test3,
-                                                            title: "Test 3",
-                                                            type: .switchRow(isOn: false, target: self, selfAction: #selector(self.switchAction))))
-```
-``` Swift
-extension ViewController: DebugMenuDelegate {
-    
-    func didSelectRow(_ id: DebugMenuRow.RowID, on vc: UIViewController) {
-        switch id {
-        case .test1:
-            vc.navigationController?.pushViewController(DebugInfoViewController(), animated: true)
-        case .test2:
-            let alertController = UIAlertController(title: "Title",
-                                                    message: "Message!",
-                                                    preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            vc.present(alertController, animated: true, completion: nil)
-        default:
-            break
-        }
-    }
-    
-}
-```
-
-## Debug UserDefaults
-Config key for debug userdefaults
-```
-GoLog.setup(with: .init(userDefaultsKeys: [.init(key: "example_key_1"), .init(key: "example_key_2")]))
 ```

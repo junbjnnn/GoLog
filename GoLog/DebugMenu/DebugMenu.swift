@@ -14,18 +14,25 @@ class DebugMenu {
     
     private init() {}
     
+    func visibleDebugMenu(isShow: Bool) {
+        if isShow {
+            addDebugMenu()
+        } else {
+            removeDebugMenu()
+        }
+    }
+    
     var devButton: DebugMenuButton? {
-        // TODO: Make config root screen
-        // let window = UIApplication.shared.delegate?.window as? UIWindow
-        let window = UIApplication.shared.keyWindow
-
-        var devButton = window?.viewWithTag(DebugMenuButton.devButtonTag) as? DebugMenuButton
+        guard let window = UIApplication.shared.windows.first else {
+            fatalError("There are no Root Window available")
+        }
+        var devButton = window.viewWithTag(DebugMenuButton.devButtonTag) as? DebugMenuButton
         let isReady = window == devButton?.superview
         if !isReady {
             devButton = DebugMenuButton.devButton()
             devButton?.addTarget(self, action: #selector(devButtonDidTap(_:)), for: .touchUpInside)
             if let devButton = devButton {
-                window?.addSubview(devButton)
+                window.addSubview(devButton)
             }
         }
         return devButton

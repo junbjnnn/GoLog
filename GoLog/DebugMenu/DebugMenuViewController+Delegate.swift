@@ -9,34 +9,35 @@
 import Foundation
 import UIKit
 
-public protocol DebugMenuDelegate: AnyObject {
-    func didSelectRow(_ id: DebugMenuRow.RowID, on vc: UIViewController)
+public protocol AddOnDebugMenuDelegate: AnyObject {
+    func didSelectMenu(at id: GoLog.MenuId, on viewController: UIViewController)
+    func switchOptionChanged(at id: GoLog.MenuId, isOn: Bool)
 }
 
 // MARK: UITableViewDelegate
 extension DebugMenuViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let row = debugMenuTableRows[indexPath.row]
-        
-        switch row.id {
+        let menuItem = debugMenus[indexPath.row]
+        switch menuItem.menuId {
         case .appInfo:
             push(DebugInfoViewController())
         case .appLog:
             let bundle = Bundle(for: self.classForCoder)
             let vc = DebugLogViewController.initFromNib(bundle: bundle)
             push(vc)
-        case .updateUserDefault:
+        case .userDefaults:
             push(DebugUserDefaultViewController())
-        case .resetUserDefault:
+        case .resetUserDefaults:
             let defaults = UserDefaults.standard
             let dictionary = defaults.dictionaryRepresentation()
             dictionary.keys.forEach { key in
                 defaults.removeObject(forKey: key)
             }
         default:
-            XDebug.Configuration.debugMenuDelegate?.didSelectRow(row.id, on: self)
-            break
+            if !menuItem.style.isSwitchStyle {
+                GoLog.debugMenuDelegate?.didSelectMenu(at: menuItem.menuId, on: self)
+            }
         }
     }
     

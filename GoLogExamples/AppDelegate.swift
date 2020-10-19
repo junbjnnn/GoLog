@@ -15,30 +15,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        configGoLog()
+        let vc = ViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
-        // Override point for customization after application launch.
-        setupLog()
+        window?.rootViewController = vc
+        window?.makeKeyAndVisible()
+        GoLog.showDebugMenu = true
         return true
     }
     
-    // MARK: UISceneSession Lifecycle
-    
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
-    }
-    
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-    }
-    
-    private func setupLog() {
-        UserDefaults.standard.set(999, forKey: "GoLog_1")
-        UserDefaults.standard.set("hello word", forKey: "GoLog_2")
-        GoLog.setup(with: .init(userDefaultsKeys: [.init(key: "GoLog_1"), .init(key: "GoLog_2")]))
+    private func configGoLog() {
+        //save demo key
+        UserDefaults.standard.set(999, forKey: "ud_key_1")
+        UserDefaults.standard.set("hello word", forKey: "ud_key_2")
+
+        let menu = [
+            GoLog.AddOnDebugMenu(menuId: .custom(key: "test1"), title: "Test 1"),
+            GoLog.AddOnDebugMenu(menuId: .custom(key: "test2"), title: "Test 2"),
+            GoLog.AddOnDebugMenu(menuId: .custom(key: "test3"), title: "Test 3", style: .switchRow(isOn: false))
+        ]
+        let userDefaults = [GoLog.LocalUserDefaultsKey(key: "ud_key_1"), GoLog.LocalUserDefaultsKey(key: "ud_key_2")]
+        let config = GoLog.Configuration(
+            logToFile: true,
+            debugAppInfoText: "Show more app info",
+            addOnDebugMenu: menu,
+            userDefaultsKeys: userDefaults
+        )
+        GoLog.setup(with: config, debugMenuDelegate: self)
     }
 }
 
+extension AppDelegate: AddOnDebugMenuDelegate {
+    func didSelectMenu(at id: GoLog.MenuId, on viewController: UIViewController) {
+        switch id {
+        case .custom(let key):
+            if key == "test1" {
+                viewController.navigationController?.pushViewController(DebugInfoViewController(), animated: true)
+            } else if key == "test2" {
+                let alertVC = UIAlertController(title: "Title", message: "Message!", preferredStyle: .alert)
+                alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                viewController.present(alertVC, animated: true, completion: nil)
+            }
+        default:
+            break
+        }
+    }
+    
+    func switchOptionChanged(at id: GoLog.MenuId, isOn: Bool) {
+        print("switch option at \(id) -- \(isOn)")
+    }
+    
+}

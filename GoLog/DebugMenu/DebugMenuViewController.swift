@@ -11,7 +11,7 @@ import UIKit
 
 final class DebugMenuViewController: UIViewController {
     
-    private (set) var debugMenuTableRows = [DebugMenuRow]()
+    private (set) var debugMenus = [GoLog.AddOnDebugMenu]()
     
     private var tableView: UITableView = {
         let tableView = UITableView()
@@ -29,7 +29,8 @@ final class DebugMenuViewController: UIViewController {
     func setupViews() {
         navigationItem.title = "~ Debug Menu ~"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        
+        tableView.register(DebugMenuDefaultCell.self, forCellReuseIdentifier: DebugMenuDefaultCell.cellId)
+        tableView.register(DebugMenuSwitchCell.self, forCellReuseIdentifier: DebugMenuSwitchCell.cellId)
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
@@ -42,58 +43,84 @@ final class DebugMenuViewController: UIViewController {
     }
     
     func setupDataSource() {
-        debugMenuTableRows.append(DebugMenuRow(id: .appInfo, title: "App info"))
-        debugMenuTableRows.append(DebugMenuRow(id: .appLog,title: "Log"))
-        debugMenuTableRows.append(DebugMenuRow(id: .updateUserDefault,title: "Update UserDefault"))
-        debugMenuTableRows.append(DebugMenuRow(id: .resetUserDefault, title: "Reset UserDefault"))
-        debugMenuTableRows += XDebug.Configuration.debugMenuTableRows
+        debugMenus.removeAll()
+        debugMenus.append(contentsOf: GoLog.buildDefaultMenus)
+        debugMenus.append(contentsOf: GoLog.configuration.addOnDebugMenu)
         tableView.reloadData()
     }
-    
 }
 
-// MARK: Cell type
-extension DebugMenuViewController {
-    func value1Cell(withText text: String?, detailText: String?) -> UITableViewCell {
-        let cell = UITableViewCell(
-            style: .value1,
-            reuseIdentifier: "")
-        cell.selectionStyle = .none
-        cell.textLabel?.text = text
-        cell.textLabel?.numberOfLines = 1
-        cell.textLabel?.adjustsFontSizeToFitWidth = true
-        cell.textLabel?.minimumScaleFactor = 0.5
-        cell.detailTextLabel?.text = detailText
-        cell.detailTextLabel?.numberOfLines = 3
-        cell.detailTextLabel?.minimumScaleFactor = 0.5
-        cell.detailTextLabel?.lineBreakMode = .byCharWrapping
-        return cell
+extension DebugMenuViewController: DebugMenuSwitchDelegate {
+    func switchOptionChanged(at menuId: GoLog.MenuId, isOn: Bool) {
+        GoLog.debugMenuDelegate?.switchOptionChanged(at: menuId, isOn: isOn)
+    }
+}
+
+class DebugMenuDefaultCell: UITableViewCell {
+    
+    static let cellId = "DebugMenuDefaultCellId"
+    
+    var data: GoLog.AddOnDebugMenu! {
+        didSet {
+            textLabel?.text = data.title
+            detailTextLabel?.text = data.style.detailText ?? ""
+        }
     }
     
-    func titleCell(withText text: String?, detailText: String?) -> UITableViewCell {
-        let cell = UITableViewCell(
-            style: .value1,
-            reuseIdentifier: "")
-        cell.textLabel?.text = text
-        cell.textLabel?.numberOfLines = 1
-        cell.textLabel?.minimumScaleFactor = 0.5
-        cell.textLabel?.lineBreakMode = .byCharWrapping
-        cell.textLabel?.textColor = UIColor.white
-        cell.backgroundColor = UIColor.darkGray
-        return cell
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
+        selectionStyle = .none
+        textLabel?.numberOfLines = 1
+        textLabel?.adjustsFontSizeToFitWidth = true
+        textLabel?.minimumScaleFactor = 0.5
+        detailTextLabel?.numberOfLines = 3
+        detailTextLabel?.minimumScaleFactor = 0.5
+        detailTextLabel?.lineBreakMode = .byCharWrapping
     }
     
-    func switchCell(withText text: String?, isOn: Bool, target: Any, selfAction: Selector) -> UITableViewCell {
-        let cell = UITableViewCell(
-            style: .value1,
-            reuseIdentifier: "")
-        
-        let swt = UISwitch(frame: CGRect(x: UIScreen.main.bounds.width - 60, y: 9, width: 51, height: 31))
-        swt.isOn = isOn
-        swt.addTarget(target, action: selfAction, for: .valueChanged)
-        cell.contentView.addSubview(swt)
-        cell.textLabel?.text = text
-        
-        return cell
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+}
+
+protocol DebugMenuSwitchDelegate {
+    func switchOptionChanged(at menuId: GoLog.MenuId, isOn: Bool)
+}
+
+class DebugMenuSwitchCell: UITableViewCell {
+    
+    static let cellId = "DebugMenuSwitchCellId"
+    var delegate: DebugMenuSwitchDelegate?
+    var data: GoLog.AddOnDebugMenu! {
+        didSet {
+            textLabel?.text = data.title
+            switch data.style {
+            case .switchRow(let isOn):
+                switchOption.isOn = isOn
+            default:
+                break
+            }
+        }
+    }
+
+    var switchOption: UISwitch = {
+        let switchOpt = UISwitch(frame: CGRect(x: UIScreen.main.bounds.width - 60, y: 9, width: 51, height: 31))
+        return switchOpt
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .value1, reuseIdentifier: reuseIdentifier)
+        selectionStyle = .none
+        switchOption.addTarget(self, action: #selector(switchOptionChanged), for: .valueChanged)
+        contentView.addSubview(switchOption)
+        selectionStyle = .none
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    @objc private func switchOptionChanged() {
+        delegate?.switchOptionChanged(at: data.menuId, isOn: switchOption.isOn)
     }
 }

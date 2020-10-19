@@ -42,10 +42,14 @@ final class DebugLogViewController: UIViewController {
         showTimeSwitch.addTarget(self, action: #selector(onShowTime), for: UIControl.Event.valueChanged)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
-            action: #selector(UIInputViewController.dismissKeyboard))
+            action: #selector(dismissKeyBoard))
         view.addGestureRecognizer(tap)
         splitLogs()
         showLog()
+    }
+    
+    @objc func dismissKeyBoard() {
+        view.endEditing(true)
     }
     
     func setupNavigation() {

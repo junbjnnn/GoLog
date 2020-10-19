@@ -15,126 +15,59 @@ import os.log
 
 public final class GoLog {
     
-    public internal(set) static var configuration: Configuration!
+    static var debugMenuDelegate: AddOnDebugMenuDelegate?
+    static var configuration: Configuration!
+    public static var showDebugMenu: Bool = false {
+        didSet {
+            DebugMenu.shared.visibleDebugMenu(isShow: showDebugMenu)
+        }
+    }
     
     public struct Configuration {
-        public static var logToFile = true
-        var userDefaultsKeys: [LocalUserDefaultsKey] = []
+        var logToFile = true
+        var debugAppInfoText = ""
+        var addOnDebugMenu = [AddOnDebugMenu]()
+        var userDefaultsKeys = [LocalUserDefaultsKey]()
         
-        public init(userDefaultsKeys: [LocalUserDefaultsKey]) {
+        public init(
+            logToFile: Bool = true,
+            debugAppInfoText: String = "",
+            addOnDebugMenu: [AddOnDebugMenu] = [],
+            userDefaultsKeys: [LocalUserDefaultsKey] = []
+        ) {
             self.userDefaultsKeys = userDefaultsKeys
+            self.addOnDebugMenu = addOnDebugMenu
+            self.logToFile = logToFile
+            self.debugAppInfoText = debugAppInfoText
         }
     }
     
-    public static func setup(with configuration: Configuration) {
+    public static func setup(with configuration: Configuration, debugMenuDelegate: AddOnDebugMenuDelegate?) {
         GoLog.configuration = configuration
+        GoLog.debugMenuDelegate = debugMenuDelegate
     }
     
-    public static func log<T: CustomStringConvertible>(category: Category = .app,
-                                                       type: OSLogType = .default,
-                                                       _ message: T,
-                                                       options: [Option] = [],
-                                                       filePath: String = #file,
-                                                       functionName: String = #function,
-                                                       lineNumber: Int = #line) {
+    public static func log<T: CustomStringConvertible>(
+        category: Category = .app,
+        type: OSLogType = .default,
+        _ message: T,
+        options: [Option] = [],
+        filePath: String = #file,
+        functionName: String = #function,
+        lineNumber: Int = #line
+    ) {
+        let extraInfo: String = GoLog.extraInfo(
+            from: options,
+            filePath: filePath,
+            functionName: functionName,
+            lineNumber: lineNumber
+        )
         
-        let extraInfo: String = GoLog.extraInfo(from: options,
-                                                 filePath: filePath,
-                                                 functionName: functionName,
-                                                 lineNumber: lineNumber)
-        
-        os_log("%{public}s%{public}s%{public}s",
-               log: category.osLog,
-               type: type,
-               type.description,
-               extraInfo,
-               message.description)
-        
-        if Configuration.logToFile {
+        let string: StaticString = "%{public}s%{public}s%{public}s"
+        os_log(string, log: category.osLog, type: type, type.description, extraInfo, message.description)
+        if GoLog.configuration.logToFile {
             Log.logger.write(type.description + extraInfo + " - " + message.description)
         }
-    }
-    
-    // Convenience
-    private static func extraInfo(from options: [Option], filePath: String, functionName: String, lineNumber: Int) -> String {
-        
-        var extraInfo: String = ""
-        
-        guard !options.isEmpty else { return "" }
-        
-        var options = options
-        if options.contains(.all) {
-            options = Option.allCases
-        }
-        
-        if options.contains(.fileAndLine) {
-            let fileAndLine = "\((filePath as NSString).lastPathComponent):\(lineNumber)"
-            extraInfo = extraInfo.isEmpty ? fileAndLine : "\(extraInfo) \(fileAndLine)"
-        }
-        
-        if options.contains(.function) {
-            extraInfo = extraInfo.isEmpty ? functionName : "\(extraInfo) \(functionName)"
-        }
-        
-        return "[\(extraInfo)] - "
-    }
-    
-    public struct LocalUserDefaultsKey {
-        var key: String
-        var description: String?
-        
-        public init(key: String) {
-            self.key = key
-        }
-    }
-}
-
-extension OSLogType: CustomStringConvertible {
-    public var description: String {
-        switch self {
-        case OSLogType.debug:
-            return "💬 DEBUG: "
-        case OSLogType.default:
-            return "✍️ DEFAULT: "
-        case OSLogType.error:
-            return "❌ ERROR: "
-        case OSLogType.fault:
-            return "🔥 FAULT: "
-        case OSLogType.info:
-            return "ℹ️ INFO: "
-        default: return "?"
-        }
-    }
-}
-
-public extension GoLog {
-    public struct Category: Equatable {
-        private var rawValue: String
-        
-        public static let app = Category("APP")
-        public static let api = Category("API")
-        public static let layout = Category("LAYOUT")
-        
-        public init(_ rawValue: String) {
-            self.rawValue = rawValue
-        }
-        
-        public static func == (lhs: Category, rhs: Category) -> Bool {
-            return lhs.rawValue == rhs.rawValue
-        }
-    }
-    
-    enum Option: CaseIterable {
-        case fileAndLine
-        case function
-        case all
-    }
-}
-
-public extension GoLog.Category {
-    var osLog: OSLog {
-        let defaultSubsystem = Bundle.main.bundleIdentifier ?? "?"
-        return OSLog(subsystem: defaultSubsystem, category: "\(self.rawValue)")
     }
 }
 
@@ -151,14 +84,14 @@ public extension GoLog {
     }()
     
     static let uuidString = UIDevice.current.identifierForVendor?.uuidString ?? ""
-
+    
     static func logAppInfo() {
         Log.logger.printToConsole = false
         
         GoLog.log(type: .info, "==============================")
         GoLog.log(type: .info, "✳️ Time : \(Date())")
         GoLog.log(type: .info,
-                   "✳️ Device Name : \(UIDevice.current.name) - MODEL : \(UIDevice.current.model)")
+                  "✳️ Device Name : \(UIDevice.current.name) - MODEL : \(UIDevice.current.model)")
         GoLog.log(type: .info, "✳️ Environment : \(environment)")
         GoLog.log(type: .info, "✳️ UUID : \(uuidString)")
         if let dict = Bundle.main.infoDictionary {

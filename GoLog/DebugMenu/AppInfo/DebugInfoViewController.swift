@@ -56,8 +56,7 @@ public final class DebugInfoViewController: UIViewController {
             }
         }
         info += "- Log path : \(Log.logger.currentPath)\n"
-        info += XDebug.Configuration.debugAppInfoText
-        
+        info += GoLog.configuration.debugAppInfoText
         return info
     }
     
