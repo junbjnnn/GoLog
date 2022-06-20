@@ -3,7 +3,7 @@
 ## Installation
 To install via CocoaPods add this lines to your Podfile.
 ```
-pod 'GoLog', '0.0.3'
+pod 'GoLog', '0.0.4'
 ```
 ## Setup
 Example setup
