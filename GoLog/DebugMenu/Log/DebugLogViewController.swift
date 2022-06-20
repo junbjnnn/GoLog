@@ -134,6 +134,7 @@ final class DebugLogViewController: UIViewController {
                 GoLog.log(category: .app, type: .error, "Delete log fail - \(error)")
             }
             self.logText = ""
+            self.logTextView.text = ""
             self.logMilestones = []
             self.runMilestones = []
             self.runMilestonePicker.reloadAllComponents()

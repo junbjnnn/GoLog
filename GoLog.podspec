@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'GoLog'
-  s.version          = '0.0.3'
+  s.version          = '0.0.4'
   s.summary          = 'GoLog'
   s.description      = "GoLog"
   s.homepage     = "https://github.com/junbjnnn/GoLog"
@@ -14,5 +14,5 @@ Pod::Spec.new do |s|
     'GoLog' => ['GoLog/GoLogBundle/*.{storyboard,xib,xcassets,json,imageset,png}']
   }
   s.dependency 'SwiftLog', '1.0.0'
-  s.swift_version = "4.2"
+  s.swift_version = "5.0"
 end
